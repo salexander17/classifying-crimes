@@ -3,3 +3,6 @@
 
 # ignoring auto-generated files created by IntelliJ
 .idea
+
+# ignoring system-generated files
+.DS_Store
