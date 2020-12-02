@@ -41,6 +41,7 @@ def main():
     df = filter_dataset(RAW_DATA_PATH)
 
     print(df.describe())
+    print(len(df))
 
 
 if __name__ == "__main__":
