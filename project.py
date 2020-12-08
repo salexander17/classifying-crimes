@@ -177,8 +177,8 @@ def main():
     # store the filtered dataset (not necessary, but useful  JiC).
     df.to_csv(index=False, path_or_buf="data/filtered-crime-data.csv")
 
-    unlabeled_crime_dataset = extract_unlabeled_data(df.head(1000), "Primary Type")
-    crime_dataset_label_values = extract_target_label_values(df.head(1000), "Primary Type")
+    unlabeled_crime_dataset = extract_unlabeled_data(df.head(10000), "Primary Type")
+    crime_dataset_label_values = extract_target_label_values(df.head(10000), "Primary Type")
 
     # Split data into train, develop, and test subsets for training/testing the baseline model
     X_train, X_develop, X_test, y_train, y_develop, y_test = split_into_train_develop_test(unlabeled_crime_dataset,
