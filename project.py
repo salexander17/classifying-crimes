@@ -1,13 +1,11 @@
 """#!/usr/bin/env python3"""
-import sys
+# import sys
 import pandas as pd
 import numpy as np
-import sns as sns
-import matplotlib.pyplot as plt
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import accuracy_score, precision_score
+
 
 from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
@@ -194,14 +192,6 @@ def main():
                                                                                     test_size=0.33, random_state=42)
 
 
-    # plt.figure(figsize=(15, 10))
-    # df_loc = df['Location Description'].value_counts().iloc[:20].index
-    # sns.countplot(y='Location Description', data=df, order=df_loc)
-    # plt.title('Top Description Locations')
-
-
-
-
     # teaching the model
     model = KNeighborsClassifier(n_neighbors=10, weights='uniform')  # LogisticRegression()
     model.fit(training_data, training_labels)
@@ -219,19 +209,19 @@ def main():
 
 
 
-    param1 = {'max_depth': [10, 11, 13, 15], 'n_estimators': [100, 500, 1000]}
+    # param1 = {'max_depth': [10, 11, 13, 15], 'n_estimators': [100, 500, 1000]}
     param = dict(
         max_depth=[n for n in range(5, 15)],
         min_samples_split=[n for n in range(2, 6)],
         min_samples_leaf=[n for n in range(2, 5)],
         n_estimators=[50, 100],
-        # criterion = ['gini','entropy']
     )
     grid_search_model = GridSearchCV(RandomForestClassifier(), param, cv=7)
     grid_search_model.fit(training_data, training_labels)
 
     # print("Best parameters {}".format(grid_search_model.best_params_) * 100)
     # print("Best score {:.4f}".format(grid_search_model.best_score_) * 100)
+
 
     forest_model = RandomForestClassifier(random_state=1)
     forest_model.fit(training_data, training_labels)
@@ -249,7 +239,7 @@ def main():
 
     decision_tree_predictions = decision_model.predict(testing_data)
 
-    grid_search_predictions = grid_search_model.predict(testing_data)
+    # grid_search_predictions = grid_search_model.predict(testing_data)
 
     # gauging how good our model performed
     print('---------------------------------- K-Nearest Neighbors Prediction Accuracy: -----------------------------')
@@ -275,11 +265,11 @@ def main():
     print('---------------------------------- Decision Tree Prediction Accuracy: -----------------------------')
     print('Below are performance metrics.')
     print(classification_report(testing_labels, decision_tree_predictions))
-    print()
-    print()
-    print('---------------------------------- Grid Search Prediction Accuracy: -----------------------------')
-    print('Below are performance metrics.')
-    print(classification_report(testing_labels, grid_search_predictions))
+    # print()
+    # print()
+    # print('---------------------------------- Grid Search Prediction Accuracy: -----------------------------')
+    # print('Below are performance metrics.')
+    # print(classification_report(testing_labels, grid_search_predictions))
 
 
 if __name__ == "__main__":
